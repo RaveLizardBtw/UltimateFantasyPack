@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using ThunderRoad;
 
-namespace UFPPowers
+namespace UFP
 {
     public class FelPower : ItemModule
     {
