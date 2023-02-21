@@ -62,7 +62,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArchWraith.cs" />
+    <Compile Include="Atlantean.cs" />
     <Compile Include="DaggerFlip.cs" />
+    <Compile Include="Dark.cs" />
+    <Compile Include="Gnomish.cs" />
+    <Compile Include="Goblin.cs" />
+    <Compile Include="Goliath.cs" />
+    <Compile Include="Holy.cs" />
+    <Compile Include="IceSpike.cs" />
+    <Compile Include="ItemReturn.cs" />
+    <Compile Include="Lightning.cs" />
     <Compile Include="Oni.cs" />
     <Compile Include="Orc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,6 +81,8 @@
     <Compile Include="Seraphinepower.cs" />
     <Compile Include="UFPDebug.cs" />
     <Compile Include="Utils.cs" />
+    <Compile Include="Vampiric.cs" />
+    <Compile Include="Voidborne.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
