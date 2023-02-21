@@ -49,7 +49,16 @@ namespace UFPScrpts
             module = item.data.GetModule<Oni>();
             damageSiphoned = 0f;
             item.mainCollisionHandler.OnCollisionStartEvent += MainCollisionHandlerOnOnCollisionStartEvent;
+            item.OnHeldActionEvent += ItemOnOnHeldActionEvent;
             instance = new CollisionInstance(new DamageStruct(DamageType.Slash, 0.3f));
+        }
+
+        private void ItemOnOnHeldActionEvent(RagdollHand ragdollhand, Handle handle, Interactable.Action action)
+        {
+            if (damageSiphoned >= module.damageRequired && (action == Interactable.Action.AlternateUseStart))
+            {
+                AbilityStart();
+            }
         }
 
         private void ItemOnOnUngrabEvent(Handle handle, RagdollHand ragdollhand, bool throwing)
@@ -134,16 +143,11 @@ namespace UFPScrpts
 
         private void MainCollisionHandlerOnOnCollisionStartEvent(CollisionInstance collisioninstance)
         {
-            if (collisioninstance.targetCollider.GetComponentInParent<Creature>() && )
+            if (collisioninstance.targetCollider.GetComponentInParent<Creature>())
             {
                 if (collisioninstance.damageStruct.damage == Mathf.Infinity) return;
                 damageSiphoned += (collisioninstance.damageStruct.damage * 10f);
                 MaterialValChange("_Power", damageSiphoned / module.materialIncrease);
-
-                if (damageSiphoned >= module.damageRequired)
-                {
-                    AbilityStart();
-                }
                 Debug.Log($"Collision Damage dealt {collisioninstance.damageStruct.damage} towards the siphon! Siphon is now at {damageSiphoned}");
             }
 
