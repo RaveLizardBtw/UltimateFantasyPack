@@ -10,16 +10,16 @@ using ThunderRoad;
 namespace UFP
 {
     public class SeraphinePower : ItemModule
+    {
+        public override void OnItemLoaded(Item item)
         {
-            public override void OnItemLoaded(Item item)
-            {
-                base.OnItemLoaded(item);
-                item.gameObject.AddComponent<SeraphineMono>();
+            base.OnItemLoaded(item);
+            item.gameObject.AddComponent<SeraphineMono>();
         }
 
 
     }
-    public class SeraphineMono : MonoBehaviour 
+    public class SeraphineMono : MonoBehaviour
     {
         Item item;
         Animator animator;
@@ -35,7 +35,7 @@ namespace UFP
 
         private void Item_OnHeldActionEvent(RagdollHand ragdollHand, Handle handle, Interactable.Action action)
         {
-         if (action == Interactable.Action.AlternateUseStart)
+            if (action == Interactable.Action.AlternateUseStart)
             {
                 animator.SetBool("Activated", !animator.GetBool("Activated"));
                 audio.enabled = !audio.enabled;
