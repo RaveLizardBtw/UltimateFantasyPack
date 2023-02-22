@@ -75,6 +75,8 @@
     <Compile Include="Atlantean.cs" />
     <Compile Include="DaggerFlip.cs" />
     <Compile Include="Dark.cs" />
+    <Compile Include="Demonic.cs" />
+    <Compile Include="Draken.cs" />
     <Compile Include="Gnomish.cs" />
     <Compile Include="Goblin.cs" />
     <Compile Include="Goliath.cs" />
