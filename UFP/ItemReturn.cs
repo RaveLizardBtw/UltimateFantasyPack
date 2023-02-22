@@ -1,6 +1,6 @@
 ﻿using ThunderRoad;
 using UnityEngine;
-namespace UltimateFantasyPack
+namespace UFP
 {
     public class ItemReturn : MonoBehaviour
     {

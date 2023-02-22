@@ -7,7 +7,7 @@ using ThunderRoad.AI.Action;
 using ThunderRoad.AI.Control;
 using UnityEngine;
 
-namespace UFPScrpts
+namespace UFP
 {
     public class OrcModule : ItemModule
     {

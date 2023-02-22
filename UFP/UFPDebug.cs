@@ -4,7 +4,7 @@ using IngameDebugConsole;
 using ThunderRoad;
 using UnityEngine;
 
-namespace UFPScrpts
+namespace UFP
 {
     public static class Extensions
     {
@@ -50,7 +50,7 @@ namespace UFPScrpts
         {
             var item = Extensions.GetField<Item>(this, name);
             Debug.Log($"Item ID is currently {item.itemId}");
-            var f = item.GetCustomReference<MeshRenderer>("BladeMesh");c
+            var f = item.GetCustomReference<MeshRenderer>("BladeMesh");
             Debug.Log($"Mesh has {f.materials.Length}");
             var e = f.material.shader;
             for (int i = 0; i < e.GetPropertyCount(); i++)

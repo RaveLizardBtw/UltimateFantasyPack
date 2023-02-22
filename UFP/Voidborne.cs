@@ -19,7 +19,7 @@ namespace UltimateFantasyPack
     }
     public class VoidMono : MonoBehaviour
     {
-        public static Item item;
+        public Item item;
         bool Cooldown;
         public void Start()
         {
@@ -44,7 +44,7 @@ namespace UltimateFantasyPack
                     Meteor.transform.position = item.transform.position;
                     Meteor.transform.rotation = Player.currentCreature.transform.rotation;
                     Meteor.rb.useGravity = false;
-                    Meteor.GetCustomReference("Meteor").GetComponent<ParticleSystem>().gameObject.AddComponent<MeteorCollision>();
+                    Meteor.GetCustomReference("Meteor").GetComponent<ParticleSystem>().gameObject.AddComponent<MeteorCollision>().item = item;
                     Meteor.Despawn(6);
                 });
                 Debug.Log("Meteor spawned in the sky");
@@ -55,6 +55,7 @@ namespace UltimateFantasyPack
 
     public class MeteorCollision : MonoBehaviour
     {
+        public Item item;
         public ParticleSystem part;
         public List<ParticleCollisionEvent> collisionEvents;
         EffectData effect;
@@ -75,24 +76,17 @@ namespace UltimateFantasyPack
 
         void OnParticleCollision(GameObject other)
         {
-            Debug.Log("Collision Added");
-            int numCollisionEvents = part.GetCollisionEvents(other, collisionEvents);
-            effect.Spawn(part.transform).Play();
-            int i = 0;
-            while (i < numCollisionEvents)
-            {
+            Debug.Log("Collision Added");           
+            effect.Spawn(part.transform).Play();          
                 foreach (Collider collider in Physics.OverlapSphere(part.transform.position, 10))
                 {
-                    if (collider.attachedRigidbody != Player.local.locomotion.rb && collider.attachedRigidbody != VoidMono.item.rb) collider.attachedRigidbody?.AddForce((collider.transform.position - VoidMono.item.transform.position).normalized * blastForce, ForceMode.Impulse);
+                    if (collider.attachedRigidbody != Player.local.locomotion.rb && collider.attachedRigidbody != item.rb) collider.attachedRigidbody?.AddForce((collider.transform.position - item.transform.position).normalized * blastForce, ForceMode.Impulse);
                     if (collider.gameObject.GetComponentInParent<Creature>() is Creature creature && !creature.isPlayer)
                     {
                         if (!creature.isKilled) creature.ragdoll.SetState(Ragdoll.State.Destabilized);
                         creature.Kill();
                     }
-                }
-
-                i++;
-            }
+                }           
         }
     }
 }

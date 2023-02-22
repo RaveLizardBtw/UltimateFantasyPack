@@ -5,7 +5,7 @@ using System.Linq;
 using ThunderRoad;
 using UnityEngine;
 
-namespace UFPScrpts
+namespace UFP
 {
     public class Oni : ItemModule
 
@@ -134,7 +134,7 @@ namespace UFPScrpts
 
         private void MainCollisionHandlerOnOnCollisionStartEvent(CollisionInstance collisioninstance)
         {
-            if (collisioninstance.targetCollider.GetComponentInParent<Creature>() && )
+            if (collisioninstance.targetCollider.GetComponentInParent<Creature>())
             {
                 if (collisioninstance.damageStruct.damage == Mathf.Infinity) return;
                 damageSiphoned += (collisioninstance.damageStruct.damage * 10f);

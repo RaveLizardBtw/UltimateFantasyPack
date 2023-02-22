@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ThunderRoad;
 using UnityEngine;
 
-namespace UltimateFantasyPack
+namespace UFP
 {
     public class ArchWraith : ItemModule
     {

@@ -9,7 +9,7 @@ using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 using System.Collections;
 
-namespace UltimateFantasyPack
+namespace UFP
 {
     public class IceSpike : ItemModule
     {

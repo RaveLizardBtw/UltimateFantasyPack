@@ -8,7 +8,7 @@ using UnityEngine.VFX;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
-namespace UltimateFantasyPack
+namespace UFP
 {
     public class Goblin : ItemModule
     {

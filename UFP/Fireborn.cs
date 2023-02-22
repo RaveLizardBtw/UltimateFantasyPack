@@ -21,11 +21,14 @@ namespace UFP
     {
         Item item;
         SpellCastCharge spell;
+        MeshRenderer mesh;
 
         public void Start()
         {
             item = GetComponent<Item>();
             spell = Catalog.GetData<SpellCastCharge>("Fire");
+            mesh = item.GetCustomReference<MeshRenderer>("mesh");
+            mesh.material.SetColor("_EmissionColor", Color.Lerp(Color.red, Color.yellow, 0.5f));
         }
 
         public void Update()

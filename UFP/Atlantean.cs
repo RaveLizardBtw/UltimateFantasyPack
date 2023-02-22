@@ -3,7 +3,7 @@ using System.Collections;
 using ThunderRoad;
 using UnityEngine;
 
-namespace UltimateFantasyPack
+namespace UFP
 {
     public class Atlantean : ItemModule
     {
