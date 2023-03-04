@@ -1,10 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using ThunderRoad;
 using UnityEngine;
-
+using System.Collections;
+using System.Collections.Generic;
 namespace UFP
 { 
     public class Oni : ItemModule
@@ -37,7 +34,6 @@ namespace UFP
         public void Start()
         {
             item = GetComponent<Item>();
-            if(UFPDebug.local != null)UFPDebug.local.activeOni = item;
             bladeRenderer = item.GetCustomReference<MeshRenderer>("BladeMesh");
             VFX = item.GetCustomReference("Particles").gameObject;
             Catalog.LoadAssetAsync<Material>("UFP.OniMat", mat => { oniMaterial = mat;}, "OniMaterial");
