@@ -19,6 +19,8 @@ namespace UFP
     }
     public class FirebornMono : MonoBehaviour
     {
+        float factor = Mathf.Pow(2, 2.5f);
+        Color color = new Color(1 * factor, 0.5 * factor, 0 * factor);
         Item item;
         SpellCastCharge spell;
         MeshRenderer mesh;
@@ -28,7 +30,7 @@ namespace UFP
             item = GetComponent<Item>();
             spell = Catalog.GetData<SpellCastCharge>("Fire");
             mesh = item.GetCustomReference<MeshRenderer>("mesh");
-            mesh.material.SetColor("_EmissionColor", Color.Lerp(Color.red, Color.yellow, 0.5f));
+            mesh.material.SetColor("_EmissionColor", Color.Lerp(Color.red , Color.yellow, 0.2f));
         }
 
         public void Update()
