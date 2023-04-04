@@ -84,11 +84,11 @@ namespace UFP
             creatureFloat.ragdoll.SetState(Ragdoll.State.Destabilized);
             yield return new WaitForSeconds(2);
 
-            foreach(RagdollPart part in creatureFloat.ragdoll.parts) { part.rb.isKinematic = true; }
+            foreach(RagdollPart part in creatureFloat.ragdoll.parts) { part.physicBody.isKinematic = true; }
 
             yield return new WaitForSeconds(4f);
 
-            foreach (RagdollPart part in creatureFloat.ragdoll.parts) { part.rb.isKinematic = false; }
+            foreach (RagdollPart part in creatureFloat.ragdoll.parts) { part.physicBody.isKinematic = false; }
             creatureFloat.ragdoll.RemovePhysicModifier(this);
             creatureFloat.locomotion.RemovePhysicModifier(this);
             creatureFloat.brain.RemoveNoStandUpModifier(this);

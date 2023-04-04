@@ -42,11 +42,11 @@ namespace UFP
                 {
                     Arch.transform.position = item.flyDirRef.position;
                     Arch.transform.rotation = Quaternion.identity;
-                    Arch.rb.useGravity = false;
+                    Arch.physicBody.useGravity = false;
 
 
                     fixedJoint = Arch.gameObject.AddComponent<FixedJoint>();
-                    fixedJoint.connectedBody = item.rb;
+                    fixedJoint.connectedBody = item.physicBody.rigidBody;
 
 
                     ArchInstance = Arch;

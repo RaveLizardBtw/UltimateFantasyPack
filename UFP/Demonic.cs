@@ -40,7 +40,7 @@ namespace UFP
             Catalog.GetData<ItemData>("DemonicExplosionVFX").SpawnAsync(item1 =>
             {
                 item1.transform.position = item.flyDirRef.transform.position;
-                item1.rb.isKinematic = true;
+                item1.physicBody.isKinematic = true;
             });
             foreach (Collider collider in Physics.OverlapSphere(item.transform.position, 10f))
             {

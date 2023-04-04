@@ -26,10 +26,10 @@ namespace UFP
         }
         void Update()
         {
-            item.rb.useGravity = !item.isFlying;
+            item.physicBody.useGravity = !item.isFlying;
             if (lastHolder?.playerHand?.controlHand != null && lastHolder.playerHand.controlHand.gripPressed && !lastHolder.playerHand.controlHand.castPressed && !item.mainHandler && !item.holder && !lastHolder.grabbedHandle)
             {
-                item.rb.AddForce((lastHolder.transform.position - item.transform.position).normalized * returnPower, ForceMode.VelocityChange);
+                item.physicBody.AddForce((lastHolder.transform.position - item.transform.position).normalized * returnPower, ForceMode.VelocityChange);
                 if ((item.transform.position - lastHolder.transform.position).sqrMagnitude < 1) lastHolder.Grab(item.GetMainHandle(lastHolder.side));
             }
         }

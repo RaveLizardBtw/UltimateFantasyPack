@@ -40,7 +40,7 @@ namespace UFP
                 item.transform.position = creature.ragdoll.headPart.transform.position + Vector3.up * 10;
                 item.Throw();
                 item.transform.LookAt(creature.ragdoll.headPart.transform.position);
-                item.rb.AddForce(-(item.transform.position - creature.ragdoll.headPart.transform.position) * 5, ForceMode.Impulse);
+                item.physicBody.AddForce(-(item.transform.position - creature.ragdoll.headPart.transform.position) * 5, ForceMode.Impulse);
                 item.Despawn(5);
             });
             yield return new WaitForSeconds(1 + delay);

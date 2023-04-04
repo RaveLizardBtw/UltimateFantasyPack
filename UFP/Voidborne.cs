@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ThunderRoad;
 using UnityEngine;
 
@@ -43,7 +39,7 @@ namespace UFP
                 {
                     Meteor.transform.position = item.transform.position;
                     Meteor.transform.rotation = Player.currentCreature.transform.rotation;
-                    Meteor.rb.useGravity = false;
+                    Meteor.physicBody.useGravity = false;
                     Meteor.GetCustomReference("Meteor").GetComponent<ParticleSystem>().gameObject.AddComponent<MeteorCollision>().item = item;
                     Meteor.Despawn(6);
                 });
@@ -76,17 +72,58 @@ namespace UFP
 
         void OnParticleCollision(GameObject other)
         {
-            Debug.Log("Collision Added");           
-            effect.Spawn(part.transform).Play();          
-                foreach (Collider collider in Physics.OverlapSphere(part.transform.position, 10))
+            Debug.Log("Collision Added");
+            effect.Spawn(part.transform).Play();
+
+            foreach (var collider in Physics.OverlapSphere(item.transform.position, 10.0f))
+            {
+                if (collider.GetComponentInParent<Creature>() is Creature creature && !creature.isPlayer)
                 {
-                    if (collider.attachedRigidbody != Player.local.locomotion.rb && collider.attachedRigidbody != item.rb) collider.attachedRigidbody?.AddForce((collider.transform.position - item.transform.position).normalized * blastForce, ForceMode.Impulse);
-                    if (collider.gameObject.GetComponentInParent<Creature>() is Creature creature && !creature.isPlayer)
+                    foreach (var parts in creature.ragdoll.parts)
                     {
-                        if (!creature.isKilled) creature.ragdoll.SetState(Ragdoll.State.Destabilized);
+                        parts?.physicBody?.rigidBody?.AddExplosionForce(blastForce, this.item.transform.position, 10.0f, 1.0f, ForceMode.VelocityChange);
+                    }
+
+                    if (!creature.isKilled)
+                    {
+                        creature?.ragdoll?.SetState(Ragdoll.State.Destabilized);
                         creature.Kill();
                     }
-                }           
+                }
+
+                if (collider.GetComponentInParent<Item>() is Item item && item != null && item != this.item)
+                {
+                    item?.physicBody?.rigidBody?.AddExplosionForce(blastForce, this.item.transform.position, 10.0f, 1.0f, ForceMode.VelocityChange);
+
+                    if (item.GetComponent<Breakable>() is Breakable breakable)
+                    {
+                        if (breakable != null)
+                        {
+                            breakable.Break();
+
+                            foreach (var brokenItems in breakable?.subBrokenItems)
+                            {
+                                brokenItems?.physicBody.rigidBody.AddExplosionForce(blastForce, this.item.transform.position, 10.0f, 1.0f, ForceMode.VelocityChange);
+                            }
+
+                            foreach (var brokenBodies in breakable?.subBrokenBodies)
+                            {
+                                brokenBodies?.rigidBody.AddExplosionForce(blastForce, this.item.transform.position, 10.0f, 1.0f, ForceMode.VelocityChange);
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*foreach (Collider collider in Physics.OverlapSphere(part.transform.position, 10))
+            {
+                if (collider.attachedRigidbody != Player.local.locomotion.rb && collider.attachedRigidbody != item.physicBody) collider.attachedRigidbody?.AddForce((collider.transform.position - item.transform.position).normalized * blastForce, ForceMode.Impulse);
+                if (collider.gameObject.GetComponentInParent<Creature>() is Creature creature && !creature.isPlayer)
+                {
+                    if (!creature.isKilled) creature.ragdoll.SetState(Ragdoll.State.Destabilized);
+                    creature.Kill();
+                }
+            }*/
         }
     }
 }

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ThunderRoad;
 using UnityEngine;
 
@@ -28,10 +24,10 @@ namespace UFP
             activationAudio = item.GetCustomReference("activationAudio").gameObject.GetComponent<AudioSource>();
             bloodVFX = item.GetCustomReference("BloodVFX").gameObject;
             readyAudio = item.GetCustomReference("readyAudio").gameObject.GetComponent<AudioSource>();
-            
+
             bloodVFX.SetActive(false);
-            
-            EventManager.onCreatureHit += EventManager_onCreatureHit;
+
+            EventManager.onCreatureHit += EventManager_onCreatureHit; ;
         }
 
         private void Item_OnHeldActionEvent(RagdollHand ragdollHand, Handle handle, Interactable.Action action)
@@ -52,7 +48,7 @@ namespace UFP
             }
         }
 
-        private void EventManager_onCreatureHit(Creature creature, CollisionInstance collisionInstance)
+        private void EventManager_onCreatureHit(Creature creature, CollisionInstance collisionInstance, EventTime eventTime)
         {
             if (!imbued)
                 return;
@@ -140,7 +136,7 @@ namespace UFP
             this._imbued = true;
             this._duration.AlwaysActive = true;
             EventManager.onCreatureSpawn += new EventManager.CreatureSpawnedEvent(this.OnCreatureSpawn);
-            Creature.allActive.Where<Creature>((Func<Creature, bool>)(creature => (UnityEngine.Object)creature.GetComponent<Player>() == (UnityEngine.Object)null)).ToList<Creature>().ForEach((System.Action<Creature>)(creature => creature.OnDamageEvent += new Creature.DamageEvent(this.OnDamage)));
+            Creature.allActive.Where<Creature>(creature => creature.GetComponent<Player>() == null).ToList<Creature>().ForEach(creature => creature.OnDamageEvent += new Creature.DamageEvent(this.OnDamage));
         }
 
         private void OnCreatureSpawn(Creature creature) => creature.OnDamageEvent += new Creature.DamageEvent(this.OnDamage);
@@ -154,15 +150,15 @@ namespace UFP
             foreach (ThunderRoad.Imbue imbue in this._item.imbues)
                 imbue.energy = 0.0f;
             EventManager.onCreatureSpawn += new EventManager.CreatureSpawnedEvent(this.OnCreatureSpawn);
-            Creature.allActive.Where<Creature>((Func<Creature, bool>)(creature => (UnityEngine.Object)creature.GetComponent<Player>() == (UnityEngine.Object)null)).ToList<Creature>().ForEach((System.Action<Creature>)(creature => creature.OnDamageEvent -= new Creature.DamageEvent(this.OnDamage)));
+            Creature.allActive.Where<Creature>(creature => creature.GetComponent<Player>() == null).ToList<Creature>().ForEach(creature => creature.OnDamageEvent -= new Creature.DamageEvent(this.OnDamage));
         }
 
-        private void OnDamage(CollisionInstance collisioninstance)
+        private void OnDamage(CollisionInstance collisioninstance, EventTime eventTime)
         {
-            if (!(bool)(UnityEngine.Object)collisioninstance.targetCollider.GetComponent<Creature>() || (bool)(UnityEngine.Object)collisioninstance.targetCollider.GetComponent<Player>() || !(bool)(UnityEngine.Object)collisioninstance.sourceCollider.GetComponent<VampireLifesteal>() || !this._imbued)
+            if (!(bool)collisioninstance.targetCollider.GetComponent<Creature>() || (bool)collisioninstance.targetCollider.GetComponent<Player>() || !(bool)collisioninstance.sourceCollider.GetComponent<VampireLifesteal>() || !this._imbued)
                 return;
-            Debug.Log((object)("Healing player for " + (collisioninstance.damageStruct.damage * 0.3f).ToString()));
-            Player.currentCreature.Heal(collisioninstance.damageStruct.damage * 0.3f, (Creature)null);
+            Debug.Log("Healing player for " + (collisioninstance.damageStruct.damage * 0.3f).ToString());
+            Player.currentCreature.Heal(collisioninstance.damageStruct.damage * 0.3f, null);
         }
 
         private void OnHeld(RagdollHand ragdollHand, Handle handle, Interactable.Action action)

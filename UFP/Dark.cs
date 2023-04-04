@@ -44,7 +44,7 @@ namespace UFP
         private void Item_OnHeldActionEvent(RagdollHand ragdollHand, Handle handle, Interactable.Action action)
         {
             
-            if (canUse && Vector3.Dot(item.rb.velocity, item.transform.right) > 0.7f && !active && action == Interactable.Action.AlternateUseStart)
+            if (canUse && Vector3.Dot(item.physicBody.velocity, item.transform.right) > 0.7f && !active && action == Interactable.Action.AlternateUseStart)
             {
                 Debug.Log("portal opened");
                 active = true;

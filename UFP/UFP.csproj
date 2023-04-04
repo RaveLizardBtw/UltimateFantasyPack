@@ -45,9 +45,6 @@
     <Reference Include="ThunderRoad">
       <HintPath>D:\Games\steamapps\common\Blade &amp; Sorcery\BladeAndSorcery_Data\Managed\ThunderRoad.dll</HintPath>
     </Reference>
-    <Reference Include="ThunderRoad.Plugins">
-      <HintPath>D:\Games\steamapps\common\Blade &amp; Sorcery\BladeAndSorcery_Data\Managed\ThunderRoad.Plugins.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.ResourceManager">
       <HintPath>D:\Games\steamapps\common\Blade &amp; Sorcery\BladeAndSorcery_Data\Managed\Unity.ResourceManager.dll</HintPath>
     </Reference>
@@ -76,7 +73,6 @@
     <Compile Include="Demonic.cs" />
     <Compile Include="DaggerFlip.cs" />
     <Compile Include="Dark.cs" />
-    <Compile Include="Demonic.cs" />
     <Compile Include="Draken.cs" />
     <Compile Include="Gnomish.cs" />
     <Compile Include="Goblin.cs" />
@@ -95,6 +91,9 @@
     <Compile Include="Utils.cs" />
     <Compile Include="Vampiric.cs" />
     <Compile Include="Voidborne.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

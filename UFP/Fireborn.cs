@@ -19,8 +19,8 @@ namespace UFP
     }
     public class FirebornMono : MonoBehaviour
     {
-        float factor = Mathf.Pow(2, 2.5f);
-        Color color = new Color(1 * factor, 0.5 * factor, 0 * factor);
+        //float factor = Mathf.Pow(2, 2.5f);
+        //Color color = new Color(1 * factor, 0.5 * factor, 0 * factor);
         Item item;
         SpellCastCharge spell;
         MeshRenderer mesh;
